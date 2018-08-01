@@ -1,0 +1,82 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="initializes_setup" id="785" x="88" y="113">
+    <statement name="CONTENT">
+      <block type="serial_init" id="786">
+        <field name="SPEED">9600</field>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="787">
+        <statement name="CONTENT">
+          <block type="serial_print" id="788" inline="false">
+            <value name="CONTENT">
+              <block type="text" id="789">
+                <field name="TEXT">土壤濕度讀數：</field>
+              </block>
+            </value>
+            <next>
+              <block type="serial_print" id="790" inline="false">
+                <value name="CONTENT">
+                  <block type="inout_analog_read" id="791">
+                    <field name="PIN">A0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="792" inline="false">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="793" inline="true">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="inout_custom_digital_read" id="794" inline="true">
+                            <value name="PIN_READ">
+                              <block type="math_number" id="795">
+                                <field name="NUM">4</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="logic_boolean" id="796">
+                            <field name="BOOL">TRUE</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="serial_println" id="797" inline="false">
+                        <value name="CONTENT">
+                          <block type="text" id="798">
+                            <field name="TEXT">    土壤濕度過乾</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="serial_println" id="799" inline="false">
+                        <value name="CONTENT">
+                          <block type="text" id="800">
+                            <field name="TEXT">    土壤濕度正常</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="delay_custom" id="801" inline="false">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id="802">
+                            <field name="NUM">1000</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

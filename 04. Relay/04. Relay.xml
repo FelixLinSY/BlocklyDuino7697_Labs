@@ -1,0 +1,150 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="initializes_setup" id="845" x="38" y="38">
+    <statement name="CONTENT">
+      <block type="serial_init" id="846">
+        <field name="SPEED">9600</field>
+        <next>
+          <block type="inout_digital_write" id="847">
+            <field name="PIN">8</field>
+            <field name="STAT">LOW</field>
+            <next>
+              <block type="variables_set" id="848" inline="true">
+                <field name="TYPE">Number</field>
+                <field name="VAR">relay_state</field>
+                <value name="VALUE">
+                  <block type="math_number" id="849">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <next>
+      <block type="initializes_loop" id="850">
+        <statement name="CONTENT">
+          <block type="controls_if" id="851" inline="false">
+            <value name="IF0">
+              <block type="logic_compare" id="852" inline="true">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="inout_digital_read" id="853">
+                    <field name="PIN">6</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="inout_highlow" id="854">
+                    <field name="BOOL">HIGH</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="delay_custom" id="855" inline="false">
+                <value name="DELAY_TIME">
+                  <block type="math_number" id="856">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="857" inline="false">
+                    <value name="IF0">
+                      <block type="logic_compare" id="858" inline="true">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="inout_digital_read" id="859">
+                            <field name="PIN">6</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="inout_highlow" id="860">
+                            <field name="BOOL">HIGH</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="controls_if" id="861" inline="false">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="862" inline="true">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="863">
+                                <field name="TYPE">Number</field>
+                                <field name="VAR">relay_state</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="864">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="865" inline="true">
+                            <field name="TYPE">Number</field>
+                            <field name="VAR">relay_state</field>
+                            <value name="VALUE">
+                              <block type="math_number" id="866">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="inout_digital_write" id="867">
+                                <field name="PIN">8</field>
+                                <field name="STAT">LOW</field>
+                                <next>
+                                  <block type="serial_println" id="868" inline="false">
+                                    <value name="CONTENT">
+                                      <block type="text" id="869">
+                                        <field name="TEXT">斷開繼電器線圈</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="variables_set" id="870" inline="true">
+                            <field name="TYPE">Number</field>
+                            <field name="VAR">relay_state</field>
+                            <value name="VALUE">
+                              <block type="math_number" id="871">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="inout_digital_write" id="872">
+                                <field name="PIN">8</field>
+                                <field name="STAT">HIGH</field>
+                                <next>
+                                  <block type="serial_println" id="873" inline="false">
+                                    <value name="CONTENT">
+                                      <block type="text" id="874">
+                                        <field name="TEXT">導通繼電器線圈</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>
